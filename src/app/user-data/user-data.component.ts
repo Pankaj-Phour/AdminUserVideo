@@ -69,8 +69,11 @@ input(event:any){
   }
 }
 
-map(index:any){
+map(id:any){
+  this.api.getuserVideo(`/userVideo?id=${id}`).subscribe((data:any)=>{
+
+    this.videoUrl = data.response.data
+  })
   this.video = true;
-  this.videoUrl = this.data[index].data
 }
 }

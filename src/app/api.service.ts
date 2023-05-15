@@ -13,4 +13,9 @@ export class ApiService {
   getUser(endpoint:any){
     return this.http.get(environment.url + endpoint)
   }
+
+
+  getuserVideo(endpoint:any){
+    return this.http.get(environment.url + endpoint)
+  }
 }
