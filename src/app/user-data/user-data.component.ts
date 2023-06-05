@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from '../api.service';
@@ -76,4 +76,22 @@ map(id:any){
   })
   this.video = true;
 }
+}
+
+
+@Component({
+  selector : 'app-user-data',
+  templateUrl : './watchVideo.html',
+  styleUrls : ['./user-data.component.scss']
+})
+
+export class watchVideoComponent implements OnInit {
+   
+  constructor(@Inject(MAT_DIALOG_DATA) public data){
+    
+  }  
+  ngOnInit(): void {
+      console.log("Hello from watchVideo",this.data);
+      
+  }
 }
