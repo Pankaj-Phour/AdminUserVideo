@@ -28,7 +28,7 @@ loader:boolean = false;
 
 
   Log(e:any){
-    console.log("Welcome to dashboard " + e);
+    // console.log("Welcome to dashboard " + e);
     
   }
   ngOnInit(): void {
@@ -87,7 +87,7 @@ watchVideo(id:any){
   this.loader = true;
   this.api.getuserVideo(`/userVideo?id=${id}`).subscribe((next:any)=>{
     this.loader = false
-    console.log(next);
+    // console.log(next);
     this.dialog.open(watchVideoComponent,{
      data : next.response,
      
@@ -109,7 +109,7 @@ export class watchVideoComponent implements OnInit {
     
   }  
   ngOnInit(): void {
-      console.log("Hello from watchVideo",this.data);
+      // console.log("Hello from watchVideo",this.data);
       
   }
 }
