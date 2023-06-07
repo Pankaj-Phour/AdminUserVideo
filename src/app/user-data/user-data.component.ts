@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from '../api.service';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-user-data',
@@ -19,13 +20,15 @@ video:boolean = false;
 lat:any;
 noData:boolean = false;
 dashboard:boolean = false;
+loader:boolean = false;
   constructor(private api:ApiService,
-    private router:Router
+    private router:Router,
+    private dialog:MatDialog
     ) { }
 
 
   Log(e:any){
-    console.log("Welcome to dashboard " + e);
+    // console.log("Welcome to dashboard " + e);
     
   }
   ngOnInit(): void {
@@ -69,11 +72,44 @@ input(event:any){
   }
 }
 
-map(id:any){
-  this.api.getuserVideo(`/userVideo?id=${id}`).subscribe((data:any)=>{
+// Code of this function is modified and written again below to open dialog for plaing video 
+// map(id:any){
+//   this.api.getuserVideo(`/userVideo?id=${id}`).subscribe((data:any)=>{
 
-    this.videoUrl = data.response.data
+//     this.videoUrl = data.response.data
+//   })
+//   this.video = true;
+// }
+
+
+watchVideo(id:any){
+  console.log(id)
+  this.loader = true;
+  this.api.getuserVideo(`/userVideo?id=${id}`).subscribe((next:any)=>{
+    this.loader = false
+    // console.log(next);
+    this.dialog.open(watchVideoComponent,{
+     data : next.response,
+     
+    })
   })
-  this.video = true;
 }
+}
+
+
+@Component({
+  selector : 'app-user-data',
+  templateUrl : './watchVideo.html',
+  styleUrls : ['./user-data.component.scss']
+})
+
+export class watchVideoComponent implements OnInit {
+   
+  constructor(@Inject(MAT_DIALOG_DATA) public data){
+    
+  }  
+  ngOnInit(): void {
+      // console.log("Hello from watchVideo",this.data);
+      
+  }
 }
