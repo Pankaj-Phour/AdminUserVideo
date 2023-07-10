@@ -21,7 +21,7 @@
                 <div class="error" *ngIf="!Login.get('password').hasError('required') && Login.get('password').value !== 'Pankaj@123' && (Submit)">Wrong Password</div>
             </div>
             <div class="button">
-                <div class="forgot">Forgot Password? </div>
+                <div class="forgot" (click)="otpLogin()">Forgot Password? Login with OTP</div>
                 <button type="button" class="btn" (click)="submit()">Submit</button>
 
             </div>

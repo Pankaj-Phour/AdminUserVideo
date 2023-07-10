@@ -72,4 +72,9 @@ export class IntroComponent implements OnInit {
     this.form.patchValue(obj2)
     console.log(this.form);
   }
+
+  otpLogin(){
+    console.log("OTP login clicked ");
+    
+  }
 }
