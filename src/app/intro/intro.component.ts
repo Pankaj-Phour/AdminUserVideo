@@ -12,6 +12,8 @@ export class IntroComponent implements OnInit {
   Login:FormGroup;
   Submit:boolean  =false;
   form:FormGroup;
+  otploginForm:FormGroup;
+  OTPLogin:boolean = false;
   constructor(private router:Router,
     private fb:FormBuilder
     ) { }
@@ -29,7 +31,11 @@ export class IntroComponent implements OnInit {
     this.Login = this.fb.group({
       email: new FormControl('',Validators.compose([Validators.required,Validators.email])),
       password: new FormControl('',Validators.required)
-    })
+    });
+     
+    this.otploginForm = this.fb.group({
+      email : new FormControl('',Validators.compose([Validators.required,Validators.email])),
+    });
   }
   submit(){
     
@@ -75,6 +81,6 @@ export class IntroComponent implements OnInit {
 
   otpLogin(){
     console.log("OTP login clicked ");
-    
+    this.OTPLogin = !this.OTPLogin;
   }
 }
