@@ -14,6 +14,7 @@ export class IntroComponent implements OnInit {
   form:FormGroup;
   otploginForm:FormGroup;
   OTPLogin:boolean = false;
+  OTP:boolean = false;
   constructor(private router:Router,
     private fb:FormBuilder
     ) { }
@@ -38,7 +39,6 @@ export class IntroComponent implements OnInit {
     });
   }
   submit(){
-    
     localStorage.setItem('submit','true');
     this.Submit = true;
     setTimeout(()=>{
@@ -47,11 +47,19 @@ export class IntroComponent implements OnInit {
     if(this.Login.valid){
       if(this.Login.value.email !== 'pankaj.phour70@gmail.com' || this.Login.value.password !== 'Pankaj@123'){
         console.log("Invalid user");
-        
       }else{
         localStorage.setItem('logged_in','true')
         this.router.navigate(['/dashboard'])
       }
+    }
+  }
+
+  emailSubmit(){
+    if(this.otploginForm.valid){
+      this.OTP = true;
+    }
+    else{
+      this.OTP = false;
     }
   }
 

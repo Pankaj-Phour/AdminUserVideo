@@ -32,14 +32,12 @@
                     Email 
                 </label>
                 <input type="email" placeholder="Enter your email" formControlName="email" autocomplete="true">
-                <div class="error" *ngIf="Login.get('email').hasError('required') && (Submit)">Please enter your Email Id</div>
-                <div class="error" *ngIf="Login.get('email').hasError('email') && (Submit)">Please enter valid Email Id</div>
-                <div class="error" *ngIf="!Login.get('email').hasError('required') && !Login.get('email').hasError('email') && Login.get('email').value !== 'pankaj.phour70@gmail.com' && (Submit)">Wrong Email Id</div>
-
+                <div class="error" *ngIf="otploginForm.get('email').hasError('required') && (Submit)">Please enter your Email Id</div>
+                <div class="error" *ngIf="otploginForm.get('email').hasError('email') && (Submit)">Please enter valid Email Id</div>
             </div>
             <div class="button">
                 <div class="forgot" (click)="otpLogin()">Login with Password</div>
-                <button type="button" class="btn" (click)="submit()">Submit</button>
+                <button type="button" class="btn" (click)="submit()">Get OTP</button>
 
             </div>
             </form>
