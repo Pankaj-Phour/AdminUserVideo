@@ -1,7 +1,7 @@
 <div class="body">
     <div class="container">
         <div class="form">
-            <form [formGroup]="Login">
+            <form [formGroup]="Login" *ngIf="!OTPLogin">
                 <div class="formgroup">
                 <label for="email">
                     Email 
@@ -21,11 +21,25 @@
                 <div class="error" *ngIf="!Login.get('password').hasError('required') && Login.get('password').value !== 'Pankaj@123' && (Submit)">Wrong Password</div>
             </div>
             <div class="button">
-                <div class="forgot">Forgot Password? </div>
+                <div class="forgot" (click)="otpLogin()">Forgot Password? Login with OTP</div>
                 <button type="button" class="btn" (click)="submit()">Submit</button>
 
             </div>
+            </form>
+            <form [formGroup]="otploginForm" *ngIf="OTPLogin">
+                <div class="formgroup">
+                <label for="email">
+                    Email 
+                </label>
+                <input type="email" placeholder="Enter your email" formControlName="email" autocomplete="true">
+                <div class="error" *ngIf="otploginForm.get('email').hasError('required') && (Submit)">Please enter your Email Id</div>
+                <div class="error" *ngIf="otploginForm.get('email').hasError('email') && (Submit)">Please enter valid Email Id</div>
+            </div>
+            <div class="button">
+                <div class="forgot" (click)="otpLogin()">Login with Password</div>
+                <button type="button" class="btn" (click)="submit()">Get OTP</button>
 
+            </div>
             </form>
         </div>
     </div>

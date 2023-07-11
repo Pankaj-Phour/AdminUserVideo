@@ -12,6 +12,9 @@ export class IntroComponent implements OnInit {
   Login:FormGroup;
   Submit:boolean  =false;
   form:FormGroup;
+  otploginForm:FormGroup;
+  OTPLogin:boolean = false;
+  OTP:boolean = false;
   constructor(private router:Router,
     private fb:FormBuilder
     ) { }
@@ -29,10 +32,13 @@ export class IntroComponent implements OnInit {
     this.Login = this.fb.group({
       email: new FormControl('',Validators.compose([Validators.required,Validators.email])),
       password: new FormControl('',Validators.required)
-    })
+    });
+     
+    this.otploginForm = this.fb.group({
+      email : new FormControl('',Validators.compose([Validators.required,Validators.email])),
+    });
   }
   submit(){
-    
     localStorage.setItem('submit','true');
     this.Submit = true;
     setTimeout(()=>{
@@ -41,11 +47,19 @@ export class IntroComponent implements OnInit {
     if(this.Login.valid){
       if(this.Login.value.email !== 'pankaj.phour70@gmail.com' || this.Login.value.password !== 'Pankaj@123'){
         console.log("Invalid user");
-        
       }else{
         localStorage.setItem('logged_in','true')
         this.router.navigate(['/dashboard'])
       }
+    }
+  }
+
+  emailSubmit(){
+    if(this.otploginForm.valid){
+      this.OTP = true;
+    }
+    else{
+      this.OTP = false;
     }
   }
 
@@ -71,5 +85,10 @@ export class IntroComponent implements OnInit {
     
     this.form.patchValue(obj2)
     console.log(this.form);
+  }
+
+  otpLogin(){
+    console.log("OTP login clicked ");
+    this.OTPLogin = !this.OTPLogin;
   }
 }
