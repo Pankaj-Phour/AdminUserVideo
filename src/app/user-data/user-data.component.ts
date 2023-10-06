@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from '../api.service';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-user-data',
@@ -104,12 +105,25 @@ watchVideo(id:any){
 })
 
 export class watchVideoComponent implements OnInit {
-   
-  constructor(@Inject(MAT_DIALOG_DATA) public data){
+  previewUrl:any;
+  iframe:boolean = false;
+  constructor(@Inject(MAT_DIALOG_DATA) public data, private sanitizer:DomSanitizer){
     
   }  
   ngOnInit(): void {
-      // console.log("Hello from watchVideo",this.data);
+      console.log("Hello from watchVideo",this.data);
+      if(this.data.data.includes('view?usp=drivesdk')){
+        this.iframe = true;
+        this.previewUrl = this.data.data.substring(0,this.data.data.length-17) + 'preview';
+        console.log(this.previewUrl);
+        this.previewUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.previewUrl)
+      }
+      else{
+        this.iframe = false;
+        this.previewUrl = this.data.data;
+      }
+      console.log(this.previewUrl);
+      
       
   }
 }
