@@ -1,3 +1,8 @@
-<div>
-    <video [src]="data.data" controls height="100%" width="100%"></video>
+<div *ngIf="iframe">
+    <iframe [src]="previewUrl" style="height: 480px;width: 640px;aspect-ratio: 4/3;" allow="autoplay"></iframe>
+    <!-- <iframe src="https://drive.google.com/file/d/1_MeD0HkgiQKfuMYlIdCzICKiGgeeOl73/preview" width="640" height="480" allow="autoplay"></iframe> -->
+</div>
+<div *ngIf="!iframe">
+
+    <video [src]="previewUrl" height="100%" width="100%" controls></video>
 </div>

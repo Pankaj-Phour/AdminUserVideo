@@ -21,9 +21,8 @@
                 <div class="error" *ngIf="!Login.get('password').hasError('required') && Login.get('password').value !== 'Pankaj@123' && (Submit)">Wrong Password</div>
             </div>
             <div class="button">
-                <div class="forgot" (click)="otpLogin()">Forgot Password? Login with OTP</div>
+                <div class="forgot" (click)="otpLogin()">Login with OTP</div>
                 <button type="button" class="btn" (click)="submit()">Submit</button>
-
             </div>
             </form>
             <form [formGroup]="otploginForm" *ngIf="OTPLogin">
@@ -37,7 +36,7 @@
             </div>
             <div class="button">
                 <div class="forgot" (click)="otpLogin()">Login with Password</div>
-                <button type="button" class="btn" (click)="submit()">Get OTP</button>
+                <button type="button" class="btn" (click)="emailSubmit()">Get OTP</button>
 
             </div>
             </form>
